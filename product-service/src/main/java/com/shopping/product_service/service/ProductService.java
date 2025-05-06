@@ -5,6 +5,9 @@ import java.util.UUID;
 import org.springframework.stereotype.Service;
 
 import com.shopping.product_service.dto.request.ProductRequest;
+import com.shopping.product_service.dto.response.ApiResponse;
+import com.shopping.product_service.mapper.ProductMapper;
+import com.shopping.product_service.model.Product;
 import com.shopping.product_service.repository.ProductRepository;
 
 import lombok.AccessLevel;
@@ -20,10 +23,20 @@ public class ProductService {
 
     ProductRepository productRepository;
 
-    public void addProduct(ProductRequest productRequest) {
+    ProductMapper productMapper;
+
+    public ApiResponse<Boolean> addProduct(ProductRequest productRequest) {
         String id = UUID.randomUUID().toString();
         
+        Product product = productMapper.toProdsuct(productRequest);
+        product.setId(id);
         
+        productRepository.save(product);
+
+        return ApiResponse.<Boolean>builder()
+                .result(true)
+                .message("Product added successfully")
+                .build();
         
     }
 

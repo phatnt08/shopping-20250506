@@ -20,7 +20,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = Exception.class)
     public ResponseEntity<ApiResponse<String>> handleGeneralException(Exception e) {
         log.error("An error occurred", e);
-        return ResponseEntity.badRequest()
+        return ResponseEntity.internalServerError()
                 .body(ApiResponse.<String>builder().code(ErrorCode.INTERNAL_SERVER_ERROR.getCode())
                         .message(ErrorCode.INTERNAL_SERVER_ERROR.getMessage()).build());
     }
