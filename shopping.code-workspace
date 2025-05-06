@@ -1,0 +1,12 @@
+{
+	"folders": [
+		{
+			"name": "product-service",
+			"path": "product-service"
+		}
+	],
+	"settings": {
+		"java.configuration.updateBuildConfiguration": "disabled",
+		"java.compile.nullAnalysis.mode": "automatic"
+	}
+}
