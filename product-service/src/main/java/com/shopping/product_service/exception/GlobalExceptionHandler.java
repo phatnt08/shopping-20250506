@@ -2,6 +2,7 @@ package com.shopping.product_service.exception;
 
 import java.nio.file.AccessDeniedException;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -21,26 +22,26 @@ public class GlobalExceptionHandler {
     public ResponseEntity<ApiResponse<String>> handleGeneralException(Exception e) {
         log.error("An error occurred", e);
         return ResponseEntity.internalServerError()
-                .body(ApiResponse.<String>builder().code(ErrorCode.INTERNAL_SERVER_ERROR.getCode())
-                        .message(ErrorCode.INTERNAL_SERVER_ERROR.getMessage()).build());
+                .body(ApiResponse.<String>builder().code(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                        .message(HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase()).build());
     }
 
     @ExceptionHandler(value = AppException.class)
     public ResponseEntity<ApiResponse<String>> handleAppException(AppException e) {
         log.error("An error occurred", e);
-        return ResponseEntity.status(e.getErrorCode().getHttpStatusCode())
-                .body(ApiResponse.<String>builder().code(e.getErrorCode().getCode())
-                        .message(e.getErrorCode().getMessage()).build());
+        return ResponseEntity.status(e.getStatus().value())
+                .body(ApiResponse.<String>builder().code(e.getStatus().value())
+                        .message(e.getStatus().getReasonPhrase()).build());
     }
 
     @ExceptionHandler(value = AccessDeniedException.class)
     public ResponseEntity<ApiResponse<String>> handleAccessDeniedException(AccessDeniedException e) {
         ApiResponse<String> response = new ApiResponse<>();
 
-        response.setCode(ErrorCode.FORBIDDEN.getCode());
-        response.setMessage(ErrorCode.FORBIDDEN.getMessage());
+        response.setCode(HttpStatus.FORBIDDEN.value());
+        response.setMessage(HttpStatus.FORBIDDEN.getReasonPhrase());
 
-        return ResponseEntity.status(ErrorCode.FORBIDDEN.getHttpStatusCode()).body(response);
+        return ResponseEntity.status(HttpStatus.FORBIDDEN.value()).body(response);
     }
 
 }

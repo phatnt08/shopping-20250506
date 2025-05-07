@@ -1,5 +1,7 @@
 package com.shopping.product_service.exception;
 
+import org.springframework.http.HttpStatus;
+
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,10 +14,10 @@ import lombok.experimental.FieldDefaults;
 @Setter
 public class AppException extends RuntimeException {
 
-    ErrorCode errorCode;
+    HttpStatus status;
     
-    public AppException(ErrorCode errorCode) {
-        super(errorCode.getMessage());
-        this.errorCode = errorCode;
+    public AppException(HttpStatus status) {
+        super(status.getReasonPhrase());
+        this.status = status;
     }
 }

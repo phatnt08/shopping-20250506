@@ -7,5 +7,3 @@ spring:
 
 server:
   port: ${SERVER_PORT:8181}
-  servlet:
-    context-path: /product
