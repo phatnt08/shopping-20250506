@@ -3,6 +3,10 @@
 		{
 			"name": "product-service",
 			"path": "product-service"
+		},
+		{
+			"name": "order-service",
+			"path": "order-service"
 		}
 	],
 	"settings": {

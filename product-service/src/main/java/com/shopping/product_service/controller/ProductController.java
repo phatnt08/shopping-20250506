@@ -34,7 +34,10 @@ public class ProductController {
     @ResponseStatus(HttpStatus.CREATED)
     public ApiResponse<ProductResponse> createProduct(@RequestBody ProductRequest request) {
         ProductResponse response = productService.createProduct(request);
-        return ApiResponse.<ProductResponse>builder().result(response).build();
+        return ApiResponse.<ProductResponse>builder()
+                .code(HttpStatus.CREATED.value())
+                .result(response)
+                .build();
     }
 
     @PutMapping("/{id}")
