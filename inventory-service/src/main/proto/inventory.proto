@@ -1,0 +1,26 @@
+
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.shopping.inventory_service.grpc";
+option java_outer_classname = "MyProto";
+
+// The greeting service definition.
+service InventoryServiceGrpc {
+  // Sends a greeting
+  rpc createInventory (InventoryGrpcRequest) returns (InventoryGrpcResponse) {
+  }
+}
+
+// The request message containing the user's name.
+message InventoryGrpcRequest {
+    string skuCode = 1;
+    int32 quantity = 2;
+}
+
+// The response message containing the greetings
+message InventoryGrpcResponse {
+    string id = 1;
+    string skuCode = 2;
+    int32 quantity = 3;
+}

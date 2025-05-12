@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: inventory-service
+
+  datasource:
+    url: ${DB_URL:jdbc:mysql://localhost:3306/inventory-service} # Default value if DB_URL is not set
+    username: ${DB_USERNAME:root} # Default value if DB_USERNAME is not set
+    password: ${DB_PASSWORD:root} # Default value if DB_PASSWORD is not set
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+server:
+  port: ${SERVER_PORT:8183}
+
+grpc:
+  server:
+    port: ${GRPC_SERVER_PORT:9090}
+    enable-http2: true
+    enable-reflection: true
+    reflection-service-enabled: true

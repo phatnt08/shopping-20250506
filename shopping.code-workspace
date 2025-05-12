@@ -7,6 +7,9 @@
 		{
 			"name": "order-service",
 			"path": "order-service"
+		},
+		{
+			"path": "inventory-service"
 		}
 	],
 	"settings": {

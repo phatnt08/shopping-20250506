@@ -41,7 +41,7 @@ public class ProductService {
 
     public ProductResponse updateProduct(String id, ProductRequest request) {
         Product product = productRepository.findById(id)
-                .orElseThrow(() -> new AppException(HttpStatus.INTERNAL_SERVER_ERROR));
+                .orElseThrow(() -> new AppException(HttpStatus.BAD_REQUEST));
 
         product = productMapper.toProduct(request);
         product = productRepository.save(product);
